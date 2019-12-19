@@ -1,0 +1,34 @@
+name: 'eonx-com/actions-harness-webhook'
+description: 'Trigger Harness Webhook'
+author: 'Damian Sloane <damian.sloane@eonx.com>'
+
+branding:
+  icon: 'x'
+  color: 'red'
+
+inputs:
+  ACCOUNT_ID:
+    description: 'Harness account ID'
+    required: true
+  WEBHOOK_ID:
+    description: 'Harness webhook ID'
+    required: true
+  APPLICATION_ID:
+    description: 'Harness application ID'
+    required: true
+  BUILD_NUMBER:
+    description: 'Build number'
+    required: true
+  PARAMETERS:
+    description: 'Optional parameters array to be passed in the request (JSON)'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.ACCOUNT_ID }}
+    - ${{ inputs.WEBHOOK_ID }}
+    - ${{ inputs.APPLICATION_ID }}
+    - ${{ inputs.BUILD_NUMBER }}
+    - ${{ inputs.PARAMETERS }}
